@@ -52,10 +52,8 @@ def ours(U, X, k, B, maxiter):
             newV, _ = np.linalg.qr(newV) # QR decomposition
 
         aa = newV.T.dot(XnowT)
-#%	aa = Xnow'*newV;
         bb = V.T.dot(newV)
         S = aa.dot(aa.T)/float(i) + (bb.T.dot(S*(i-1)/float(i))).dot(bb)
-#%	S = aa'*aa/i+bb'*S*bb*(i-1)/i;
         V = newV
 
         totaltime = totaltime + time.time() - timebegin
@@ -63,7 +61,6 @@ def ours(U, X, k, B, maxiter):
         if (totalsample == B or totalsample > totalsample_prev + n/10):
             timelist.append(totaltime)
             iterlist.append(totalsample)
-#            acc = np.matrix.trace(V.T.dot(X.T.dot(X.dot(V)))) / float(alltrace)
             acc = distance(V, U)
             acclist.append(acc)       
             totalsample_prev = totalsample
